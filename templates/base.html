@@ -1,0 +1,78 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Test Correct{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/prompt_details.css">
+    <!-- Favicon for the website -->
+    <link rel="icon" href="https://welcome.test-correct.nl/img/icons/Logo-Test-Correct-recolored-icon-only.svg" type="image/svg+xml">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class = "body_base">
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Logo and link to the home page -->
+            <a class="navbar-brand" href="{{ url_for('home_page') }}">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo">
+            </a>
+            <!-- Hamburger menu for smaller screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 30 30\'%3e%3cpath stroke=\'%23004DF5\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/%3e%3c/svg%3e');"></span>
+            </button>
+            <!-- Navigation links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home_page') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('questions') }}">Vragen</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('prompt_overview') }}">AI Prompts</a>
+                    </li>
+                    {% if is_admin %} 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('editor_overview') }}">Redacteuren</a>
+                        </li>
+                    {% endif %} 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('category')}}">Categoriseren</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('taxonomy_overview')}}" class="nav-link">Taxonomie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('support')}}" class="nav-link">Support</a>
+                    </li>
+                    {% if is_admin %} 
+                    <li class="nav-status">
+                        <span class="nav-link disabled">Admin</span>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!-- Logout button -->
+                <div class="logout" >
+                    <a href="{{ url_for('logout') }}">
+                        <svg  xmlns="http://www.w3.org/2000/svg"width="27" height="27" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
+                    </a>
+                </div>  
+            </div>
+        </div>
+    </nav>
+    <!-- Main content area -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

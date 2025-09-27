@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inlogpagina</title>
+  <!-- Favicon for the website -->
+  <link rel="icon" href="https://welcome.test-correct.nl/img/icons/Logo-Test-Correct-recolored-icon-only.svg" type="image/svg+xml">
+
+  <!-- Bron: https://www.geeksforgeeks.org/how-to-use-css-in-python-flask/ -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/loginstyle.css') }}">
+</head>
+<body>
+  <!-- Main container for the login page -->
+  <div class="square">
+    <img src="{{ url_for('static', filename='images/login.svg') }}" alt="login" class="login">
+    <div class="square-content">
+      <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo" class="logo">
+
+      <p class="title">INLOGGEN</p>
+      <!-- Container for username and password input fields -->
+      <div class="gegevens">
+        <!-- Inputfields -->
+        <form method="POST" action="/login">
+        <div class="inputbox">
+          <!-- Bron: https://ionic.io/ionicons/usage -->
+          <input class="email" name="login" type="mail" required>
+          <label for=""><ion-icon name="person-outline"></ion-icon>E-mailadres</label>
+        </div>
+        
+        <div class="inputbox">
+          <input class="password" name="password" type="password" required>
+          <label for=""><ion-icon name="lock-closed-outline"></ion-icon>Wachtwoord</label>
+      </div>
+
+        <!-- Display error message if login fails -->
+        {% if error %}
+          <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <!-- Submit button for login -->
+        <div class="loginbutton">
+          <button type="submit" class="login_button">INLOGGEN</button>
+        </div>
+      </form>
+    </div>
+    
+    </div>
+  </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

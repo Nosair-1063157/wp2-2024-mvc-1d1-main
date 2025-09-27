@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="support-container">
+    <h1 class="text-center mb-4">Hoe kunnen we je helpen?</h1>
+    <div class="kb-search__bar d-flex justify-content-center">
+        <input type="text" name="search_answer" value="{{ request.args.get('search_answer', '') }}" class="kb-search__input form-control" placeholder="Naar antwoorden zoeken" required>
+        <button class="btn btn-primary ms-2">Zoeken</button>
+    </div>
+
+    <div class="row">
+        <div class="center" style="margin-top: 5%;">
+            <div class="d-flex text-center gap-3">
+                <div class="card p-4 text-decoration-none mb-4" onclick="window.location.href='/support/vragen'" style="cursor: pointer;">
+                    <h1>Vragen</h1>
+                    <p>Leer het werkproces van de vragen</p>
+                </div>
+                <div class="card p-4 text-decoration-none mb-4" onclick="window.location.href='/support/prompts'" style="cursor: pointer;">
+                    <h1>Prompts</h1>
+                    <p>Leer het werkproces van de AI prompts</p>
+                </div>
+                <div class="card p-4 text-decoration-none mb-4" onclick="window.location.href='/support/redacteuren'" style="cursor: pointer;">
+                    <h1>Redacteuren</h1>
+                    <p>Leer het werkproces van de redacteuren</p>
+                </div>
+            </div>
+       </div>
+    </div>
+
+</div>
+
+{% endblock %}

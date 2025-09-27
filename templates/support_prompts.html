@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/support" class="text-decoration-none">&larr; Support</a>
+
+<div class="d-flex">
+  <nav class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="/support/vragen">Vragen</a></li>
+      <li class="nav-item"><a class="nav-link active" href="/support/prompts">Prompts</a></li>
+      <li class="nav-item"><a class="nav-link" href="/support/redacteuren">Redacteuren</a></li>
+    </ul>
+  </nav>
+
+  <div class="content-container ms-4">
+    <h1>AI Prompts</h1>
+    <p>Leer hier alles over het werkproces van AI prompts</p>
+    <hr/>
+
+    <h4>Prompts Overzicht</h4>
+    <p>De Prompts Overzicht toont via een tabel alle beschikbare prompts in het systeem. Via dit overzicht kun je de prompts bekijken, filteren, sorteren en verwezen worden naar meer gedetailleerde details.</p>
+    <hr/>
+
+    <h5>Prompt Details</h5>
+    <p>De Prompt Details toont meer gedetailleerde informatie over de geselecteerde prompt. Details zoals de inhoud van de prompt, de bijbehorende redacteur, de aanmaakdatum en verdere statistieken over de toetsvragen kunnen hier worden gevonden.</p>
+    <ul>
+      <li>Bekijk het aantal <strong>gecategoriseerde toetsvragen, correct beantwoorde vragen</strong> en <strong>incorrect beantwoorde vragen.</strong></li>
+      <li>Via de <strong>Terug</strong> knop kun je terug gaan naar het overzicht van de prompts.</li>
+      <li>Via de <strong>Verwijderen</strong> knop kun je de prompt permanent verwijderen uit het systeem.</li>
+    </ul>
+    <hr/>
+
+    <h5>Nieuwe Prompt</h5>
+    <p>Het creëren van een nieuwe prompt is mogelijk door de volgende stappen te volgen:</p>
+    <ul>
+      <li><strong>Titel:</strong> Vul de naam van de prompt in.</li>
+      <li><strong>Prompt:</strong> Vul de inhoud van de prompt in.</li>
+    </ul>
+    <p>Wanneer alle velden zijn ingevuld, klik je op de <strong>Opslaan</strong> knop om de prompt op te slaan in het systeem.</p>
+    <hr/>
+  </div>
+</div>
+
+{% endblock %}

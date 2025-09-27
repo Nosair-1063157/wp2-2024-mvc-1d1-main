@@ -1,0 +1,128 @@
+<!-- templates/base.html -->
+{% include 'base.html' %}
+
+<div class="container container_prompt_overview">
+    <div class = "title_prompts">
+        <h1>Redacteuren</h1>
+    </div>
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+                
+    <form method="get" class="d-flex justify-content-between">
+        <div class="d-flex">
+            <input type="text" name="search_name" value="{{ request.args.get('search_name', '') }}" class="form-control form-control-sm" placeholder="Filter op naam">
+            <select name="sort_name" class="form-select form-select-sm me-2">
+                <option value="asc" {% if request.args.get('sort_name') == "asc" %}selected{% endif %}>A-Z</option>
+                <option value="desc" {% if request.args.get('sort_name') == "desc" %}selected{% endif %}>Z-A</option>
+            </select>
+
+            <input type="text" name="search_login" value="{{ request.args.get('search_login', '') }}" class="form-control form-control-sm me-2" placeholder="Filter op login">
+
+            <select name="filter_admin" class="form-select form-select-sm">
+                <option value="" {% if request.args.get('filter_admin') == "" %}selected{% endif %}->Alle</option>
+                <option value="1" {% if request.args.get('filter_admin') == "1" %}selected{% endif %}>Admin</option>
+                <option value="0" {% if request.args.get('filter_admin') == "0" %}selected{% endif %}>Niet Admin</option>
+            </select>
+        </div>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary me-2">Filter</button>
+            <a href="{{ url_for ('editor_overview') }}" class="btn btn-danger">Reset</a>
+        </div>
+    </form>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Loginnaam</th>
+                    <th>Admin</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if users %}
+                {% for user in users %}
+                <tr>
+                    <td>{{ user["display_name"] }}</td>
+                    <td>{{ user["login"] }}</td>
+                    <td>
+                    {% if user[5] == 1 %}
+                    <span class="admin-yes">Ja</span>
+                    {% else %}
+                    <span class="admin-no">Nee</span>
+                    {% endif %}
+                    </td>
+                    <td>
+                    <a class="btn btn-primary" href="{{ url_for('edit_editor', user_id=user['user_id']) }}">Bewerken</a>
+                        <form action="{{ url_for('delete_editor', user_id=user['user_id']) }}" method="POST" style="display:inline;" onsubmit="return confirm('Weet je zeker dat je deze editor wilt verwijderen?');">
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
+                        </form>
+
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+            <tr>
+                <td colspan="5">Geen gebruikers gevonden</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4 action-buttons">
+            <a class="btn btn-primary" href="{{ url_for('edit_editor', user_id=session['user_id']) }}">
+            Wijzig eigen gegevens
+            </a>
+
+            <a class="btn btn-success" href="{{ url_for('create_editor') }}">
+            Nieuwe Redacteur
+            </a>
+        </div>
+        
+        {% if total_pages > 1 %}
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('editor_overview', page=page-1, filter_admin=filter_admin, search_name=search_name, search_login=search_login, sort_name=sort_name) }}" class="arrow" title="Vorige pagina">❮</a>
+            {% else %}
+                <a class="arrow disabled" title="Vorige pagina">❮</a>
+            {% endif %}
+            
+            {% if page > 3 %}
+                <a href="{{ url_for('editor_overview', page=1, filter_admin=filter_admin, search_name=search_name, search_login=search_login, sort_name=sort_name) }}">1</a>
+                <span class="dots">...</span>
+            {% endif %}
+            
+            {% for page_num in range(
+                [1, page - 1]|max, 
+                [total_pages + 1, page + 2]|min
+            ) %}
+                {% if page_num == page %}
+                    <a href="#" class="current">{{ page_num }}</a>
+                {% else %}
+                    <a href="{{ url_for('editor_overview', page=page_num, filter_admin=filter_admin, search_name=search_name, search_login=search_login, sort_name=sort_name) }}">
+                        {{ page_num }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page < total_pages - 2 %}
+                <span class="dots">...</span>
+                <a href="{{ url_for('editor_overview', page=total_pages, filter_admin=filter_admin, search_name=search_name, search_login=search_login, sort_name=sort_name) }}">
+                    {{ total_pages }}
+                </a>
+            {% endif %}
+
+            {% if page < total_pages %}
+                <a href="{{ url_for('editor_overview', page=page+1, filter_admin=filter_admin, search_name=search_name, search_login=search_login, sort_name=sort_name) }}" class="arrow" title="Volgende pagina">❯</a>
+            {% else %}
+                <a class="arrow disabled" title="Volgende pagina">❯</a>
+            {% endif %}
+        </div>
+        {% endif %}

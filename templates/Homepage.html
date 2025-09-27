@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Homepagina - Test Correct{% endblock %}
+
+{% block content %}
+<div class="center">
+        <h1 class="h1-welcome">
+            <span class="welcome-text">Welkom</span>
+            <span class="username">{{ display_name }}</span>
+        </h1>
+    <hr>
+
+<div class="container mt-4">
+    {% if uncategorized and uncategorized|length > 0%}
+        <h2 class="centered-heading">Niet-gecategoriseerde vragen</h2>
+        <table class="table table-bordered table-short">
+            <thead>
+                <tr>
+                    <th>Vraag</th>
+                    <th>Categoriseren</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for q in uncategorized %}
+                <tr>
+                    <td>{{ q['question'] }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ url_for('category', question_id=q['questions_id']) }}"> Categoriseer
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+    <h2 class="centered-heading">Alle vragen zijn gecategoriseerd</h2>
+
+    {% endif %}
+</div>
+{% endblock %}

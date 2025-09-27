@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="d-flex justify-content-center">
+                <h2 class="mb-4 text-nowrap">Voeg een Nieuwe Vraag Toe</h2>
+            </div>
+            <form action="{{ url_for('create_question') }}" method="POST" class="shadow p-4 rounded bg-light">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="question_id" class="form-label">Vraag ID</label>
+                        <input type="text" class="form-control" id="question_id" name="questions_id" placeholder="Bijv 1" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="prompts_id" class="form-label">Prompt ID</label>
+                        <input type="number" class="form-control" id="prompts_id" name="prompts_id" placeholder="Bijv 1" required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="user_id" class="form-label">Gebruiker</label>
+                    <select class="form-select" id="user_id" name="user_id" required>
+                        <option value="" disabled selected>Selecteer een gebruiker</option>
+                        {% for user in users %}
+                        <option value="{{ user[0] }}">{{ user[3] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="question" class="form-label">Vraag</label>
+                    <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type hier je vraag" required></textarea>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="taxonomy_bloom" class="form-label">Bloom Taxonomie</label>
+                        <input type="text" class="form-control" id="taxonomy_bloom" name="taxonomy_bloom" placeholder="Bijv Knowledge" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="rtti" class="form-label">RTTI</label>
+                        <input type="text" class="form-control" id="rtti" name="rtti" placeholder="Bijv RTTI1" required>
+                    </div>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="exported" name="exported">
+                    <label class="form-check-label" for="exported">Gepubliceerd</label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Toevoegen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

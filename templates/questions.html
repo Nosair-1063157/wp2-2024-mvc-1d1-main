@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %} Vragen - Test Correct{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class = "title_prompts">
+        <h1>Vragen Overzicht</h1>
+    </div>
+    <div class="filter-upload-container">
+        <form method="GET" action="{{ url_for('questions') }}" class="filter-options d-flex">
+            <div class="d-flex">
+                <input
+                    type="text"
+                    name="query"
+                    class="form-control form-control-sm"
+                    placeholder="Zoek naar vragen"
+                    value="{{ search_query }}">
+                <button type="submit" class="btn btn-primary" >Zoeken</button>
+                <a href="{{ url_for ('questions') }}" class="btn btn-danger">Reset</a>
+            </div>
+        </form>
+    
+        <div class="upload-section">
+            <h3 class="upload-title">Vragen Uploaden</h3>
+            <form method="POST" action="/upload_json" enctype="multipart/form-data" class="json-upload-form">
+                <div class="json-upload-container">
+                    <input
+                        type="file"
+                        name="json_file"
+                        class="json-upload-input"
+                        accept="application/json"
+                    >
+                    <button type="submit" class="json-upload-button">Upload JSON</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Table Section -->
+    <table class="table table-hover questions">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Prompt ID</th>
+                <th scope="col">Vraag</th>
+                <th scope="col">Bloom</th>
+                <th scope="col">RTTI</th>
+                <th scope="col">Gepubliceerd</th>
+                <th scope="col">Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if questions %}
+            {% for question in questions %}
+            <tr>
+                <td>{{ question['prompts_id'] }}</td>
+                <td class="td_question">{{ question['question'] }}</td>
+                <td>{{ question['taxonomy_bloom'] }}</td>
+                <td>{{ question['rtti'] }}</td>
+                <td>{{ 'Ja' if question['exported'] else 'Nee' }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acties">
+                        {% if question['categorised'] == 1 %}
+                        <a href="{{ url_for('export_question', question_id=question['questions_id']) }}" class="btn btn-success btn-sm">Exporteren</a>
+                        {% else %}
+                        <a href="{{ url_for('export_question', question_id=question['questions_id']) }}" class="btn-secondary btn-sm">Exporteren</a>
+                        {% endif %}
+                        <a href="{{ url_for('edit_question', question_id=question['questions_id']) }}" class="btn btn-warning btn-sm">Bewerken</a>
+                        <form action="{{ url_for('delete_question', question_id=question['questions_id']) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Verwijderen</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">Geen vragen gevonden</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('create_question') }}">
+        <button type="button" class="btn btn-success add_btn">Toevoegen</button>
+    </a>
+    <a href="{{ url_for('export_all') }}">
+        <button type="button" class="btn btn-success add_btn">Export Alle Vragen</button>
+    </a>
+
+    <!-- Bron: https://youtu.be/U18hO1ngZEQ?si=e7YMcLeT5wGR5TPQ -->
+    <!-- Bron: ChatGPT -->
+    {% if total_pages > 1 %}
+    <div class="pagination">
+        {% if current_page > 1 %}
+            <a href="{{ url_for('questions', page=current_page-1, query=search_query, user_id=current_user_id, order=current_order) }}" class="arrow" title="Vorige pagina">❮</a>
+        {% else %}
+            <a class="arrow disabled" title="Vorige pagina">❮</a>
+        {% endif %}
+
+        {% if current_page > 3 %}
+            <a href="{{ url_for('questions', page=1, query=search_query, user_id=current_user_id, order=current_order) }}">1</a>
+            <span class="dots">...</span>
+        {% endif %}
+
+        {% for page_num in range(
+            [1, current_page - 1]|max,
+            [total_pages + 1, current_page + 2]|min
+        ) %}
+            {% if page_num == current_page %}
+                <a href="#" class="current">{{ page_num }}</a>
+            {% else %}
+                <a href="{{ url_for('questions', page=page_num, query=search_query, user_id=current_user_id, order=current_order) }}">
+                    {{ page_num }}
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if current_page < total_pages - 2 %}
+            <span class="dots">...</span>
+            <a href="{{ url_for('questions', page=total_pages, query=search_query, user_id=current_user_id, order=current_order) }}">
+                {{ total_pages }}
+            </a>
+        {% endif %}
+
+        {% if current_page < total_pages %}
+            <a href="{{ url_for('questions', page=current_page+1, query=search_query, user_id=current_user_id, order=current_order) }}" class="arrow" title="Volgende pagina">❯</a>
+        {% else %}
+            <a class="arrow disabled" title="Volgende pagina">❯</a>
+        {% endif %}
+    </div>
+    
+    {% endif %}
+{% endblock %}

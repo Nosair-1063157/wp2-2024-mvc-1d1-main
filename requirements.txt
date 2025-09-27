@@ -1,0 +1,5 @@
+Flask
+openai
+ollama
+flask 
+flask-bcrypt

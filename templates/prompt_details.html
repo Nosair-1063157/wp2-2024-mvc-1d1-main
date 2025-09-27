@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container prompt-details">
+    <div class = "container">
+        <div class="row">
+            <div class="col-8  prompt_details_col">
+                <!-- Title prompt details -->
+                <div class = "title_prompts">
+                    <h1>Prompt Details</h1>
+                </div>
+
+                <!-- Small title section displaying the prompt title -->
+                <div class = "small_title_details">
+                    <h4>{{prompt.prompt_title}}<h4><!-- Displaying the prompt's title --> 
+                </div>
+
+                <!-- Main content displaying the prompt's details -->
+                <p>
+                    {{prompt.prompt}}
+                    <br>
+                    <br>
+                </p>
+                <!-- Displaying information about the prompt -->
+                <p>
+                    Redacteur: 
+                    {% if prompt.display_name %}
+                        {{ prompt.display_name }}
+                    {% else %}
+                        Gebruiker verwijderd
+                    {% endif %}<br>
+                    Aangemaakt: {{ prompt.date_created }}<br>
+                    Toetsvragen gecategoriseerd: {{ prompt.questions_count }}<br>
+                    Toetsvragen correct: {{ prompt.questions_correct }}<br>
+                    Aantal incorrecte vragen: {{ incorrect_questions }}
+                </p>
+                <!-- Delete the prompt -->
+                <form action="/delete_task/{{ prompt.prompts_id }}" method="POST" onsubmit="return confirm('Weet je zeker dat je deze prompt wilt verwijderen?')">
+                    <!-- Back button -->
+                    <a href="/prompt_overview" class="btn btn-primary back_button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                        </svg>
+                    </a>
+                    <!-- Delete button -->
+                    {% if is_admin %} 
+                        <button type="submit" class="btn btn-danger delete_button">VERWIJDEREN</button>
+                    {% endif %} 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+            

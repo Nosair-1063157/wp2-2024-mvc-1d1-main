@@ -1,0 +1,22 @@
+{% extends "base.html"%}
+
+{% block content %}
+<body id="bloom_category_body">
+    <div class="container">
+        <div class="col-8">
+            <form method="POST" class="add_form">
+                <h5>categorie:</h5>
+                <p>{{ categorized_question["categorie"] }}</p>
+                <h5>uitleg:</h5>
+                <p>{{ categorized_question["uitleg"] }}</p>
+                <h5>json:</h5>
+                <p>{{ categorized_question }}</p>
+                <div class="col-12">
+                    <button class="btn btn-success" type="submit" name="action" value="approve">Goedkeuren</button>
+                    <button class="btn btn-danger" type="submit" name="action" value="reject">Afwijzen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Background */
+body{
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  background-image: 
+    linear-gradient(rgba(61, 187, 86, 0.3), rgba(61, 187, 86, 0.3)),
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+  url("../images/background.png");
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+/* White square */
+.square {
+  width: 30%;
+  height: 65vh;
+  min-width: 60vh;
+  margin: 12vh auto 0 auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Login SVG styling */
+.login {
+  width: 64px;
+  position: absolute;
+  left: 50%;
+  top: -32px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+
+.square-content {
+  padding-top: 20px;
+}
+
+.logo {
+  width: 300px; 
+  display: block; 
+  margin: 20px auto; 
+}
+
+/* Titlefont */
+.title {
+  font-size: 37px;
+  display: flex;
+  justify-content: left;
+  margin-left: 80px;
+  color: #041F74;
+  text-shadow: 2px 2px rgba(156, 154, 154, 0.537);
+  font-weight: 900;
+}
+
+.sign-up {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+/* Inputboxes */
+.inputbox{
+  border-bottom: 3px solid #041F74;
+  position: relative;
+  margin: 15px 0;
+  width: 310px;
+  display: flex;
+  justify-content: center;
+}
+
+.inputbox label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: black;
+  opacity: 0.6;
+  font-size: 1em;
+  pointer-events: none;
+  transition: .5s;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -25px;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  color: #424242;
+  font-size: .75rem;
+  top: -4px;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.inputbox input:focus ~ ion-icon,
+.inputbox input:valid ~ ion-icon {
+  font-size: 0.75rem; 
+}
+
+.inputbox input.email,
+.inputbox input.password {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  color: black;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  border: none;
+  outline: none;
+}
+
+.gegevens{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  margin-top: 20px;
+}
+
+.inputbox ion-icon {
+  margin-right: 7px;
+  font-size: 1em; 
+  transform: translateY(2px);
+}
+
+input:focus ~ ion-icon,
+input:valid ~ ion-icon {
+  font-size: 0.75em; 
+}
+
+/* Loginbutton */
+.loginbutton{
+  display: flex;
+  justify-content: center;
+}
+
+.login_button {
+  background-color: #3DBB56;
+  color: white;
+  font-weight: 900;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-left: 20px;
+  margin-top: 20px;
+  transition: opacity 0.15s;
+  vertical-align: top;
+}
+
+.login_button:hover{
+opacity: 0.8;
+}
+
+.login_button:active{
+opacity: 0.5;
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid #041F74; 
+  width: 310px; 
+  margin: 20px auto; 
+}
+
+.sign-up{
+  display: flex;
+  flex-direction: column;
+  align-items: left; 
+  margin-left: 80px;
+  color:#090618;
+  margin-top: 20px;
+}
+
+.sign-up a {
+  color: #041F74; 
+  text-decoration: none; 
+}
+
+.sign-up a:hover {
+  color: #004DF5; 
+}

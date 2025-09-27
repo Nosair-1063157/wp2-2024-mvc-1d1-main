@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container d-flex flex-column">
+    <h1 class="my-4 text-center">Bewerk Vraag</h1>
+
+    <form action="{{ url_for('edit_question', question_id=question['questions_id']) }}" method="POST">
+        <div class="form-group">
+            <label for="question_id">Vraag ID</label>
+            <input type="text" class="form-control" id="question_id" name="question_id" value="{{ question['questions_id'] }}" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="prompts_id">Prompt ID</label>
+            <input type="text" class="form-control" id="prompts_id" name="prompts_id" value="{{ question['prompts_id'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="user_id">Gebruiker ID</label>
+            <input type="text" class="form-control" id="user_id" name="user_id" value="{{ question['user_id'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="question">Vraag</label>
+            <textarea class="form-control" id="question" name="question" rows="4" required>{{ question['question'] }}</textarea>
+        </div>
+
+
+        <div class="form-group">
+            <label for="taxonomy_bloom">Bloom Taxonomie</label>
+            <input type="text" class="form-control" id="taxonomy_bloom" name="taxonomy_bloom" value="{{ question['taxonomy_bloom'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rtti">RTTI</label>
+            <input type="text" class="form-control" id="rtti" name="rtti" value="{{ question['rtti'] }}" required>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exported" name="exported" {% if question['exported'] == 1 %}checked{% endif %}/>
+            <label class="form-check-label" for="exported">Gepubliceerd</label>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+        <a href="{{ url_for('questions') }}" class="btn btn-secondary">Annuleren</a>
+    </form>
+</div>
+{% endblock %}

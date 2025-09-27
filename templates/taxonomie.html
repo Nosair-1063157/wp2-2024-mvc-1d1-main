@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container container-taxonomie">
+    <div class="block-content top-taxonomie">
+        <div class="block title-tax">
+            <h1>
+                Vraag naar Taxonomie
+            </h1>
+        </div>
+        <div class="block text-tax">
+            <p>
+               {% if prompt_text %}
+                    {{ prompt_text }}
+                {% else %}
+                    <strong>{{ error }}</strong>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div class="block-content bottom-taxonomie">
+        {% if taxonomies %}
+        <div class="block dropdown-tax">
+            <form method="POST">
+                <div class="dropdown">
+                    <select class="form-select-sm" name="taxonomy" id="taxonomy-dropdown" required>
+                        <option value="">Selecteer een taxonomie</option>
+                        {% for taxonomy in taxonomies %}
+                        <option value="{{ taxonomy }}">{{ taxonomy }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="block button-tax">
+                    <button type="submit" class="btn btn-succes" style="width: 100%">Generate</button>
+                </div>
+            </form>
+        </div>
+        {% else %}
+        <p><strong> Er zijn geen taxonomieën</strong></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

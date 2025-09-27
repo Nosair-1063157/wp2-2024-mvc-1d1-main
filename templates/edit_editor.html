@@ -1,0 +1,56 @@
+<!-- templates/base.html -->
+{% extends "base.html"%}
+
+{% block content %}
+<!-- Main container for the form -->
+<div class="square">
+    <!-- Icon -->
+    <img src="{{ url_for('static', filename='images/redacteur.svg') }}" alt="usersvg" class="usersvg">
+
+    <p class="title">Redacteur wijzigen</p> 
+    <hr>
+
+    <!-- Form container -->
+    <div class="data">
+    <form method="POST">
+        <div class="form-group">
+            <label for="display_name">Naam</label>
+            <input type="text" id="display_name" name="display_name" class="form-control" placeholder="Vul jouw volledige naam in" value="{{ user.display_name}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="login">Login Naam</label>
+            <input type="text" id="login" name="login" class="form-control" placeholder="Vul jouw emailadres in" value="{{ user.login }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Vul jouw wachtwoord in " required>
+        </div>
+
+        <div class="form-group">
+            <label for="is_admin">Admin</label>
+            <select id="is_admin" name="is_admin" class="form-control">
+                <option value="1">Ja</option>
+                <option value="0">Nee</option>
+            </select>
+        </div>
+
+        <div class"button_container">
+            <!-- Back button -->
+            <a href="/editor_overview" class="btn btn-primary back_button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </a>
+            
+            <!-- Save button to submit the form -->
+            <div class="save_button">
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+{% endblock %}

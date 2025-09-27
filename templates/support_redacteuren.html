@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/support" class="text-decoration-none">&larr; Support</a>
+
+
+<div class="d-flex">
+  <nav class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="/support/vragen">Vragen</a></li>
+      <li class="nav-item"><a class="nav-link" href="/support/prompts">Prompts</a></li>
+      <li class="nav-item"><a class="nav-link active" href="/support/redacteuren">Redacteuren</a></li>
+    </ul>
+  </nav>
+
+  <div class="content-container ms-4">
+    <h1>Redacteuren</h1>
+    <p>Leer hier alles over het werkproces van redacteuren</p>
+    <hr/>
+
+    <h4>Redacteuren Overzicht</h4>
+    <p>Het Redacteuren Overzicht toont via een tabel alle bestaande redacteuren in hey systeem. Hier kun je de redacteuren filteren en sorteren:</p>
+    <ul>
+      <li><strong>Filteren op naam:</strong> Gebruik de zoekbalk om naar specifieke redacteuren te zoeken op basis van hun naam.</li>
+      <li><strong>Sorteren op naam:</strong> Kies of de namen van redacteuren worden gesorteerd op oplopende (A-Z) of aflopende (Z-A) volgorde.</li>
+      <li><strong>Filteren op login:</strong> Gebruik de zoekbalk om naar specifieke redacteuren te zoeken op basis van hun loginnaam/emailadres.</li>
+      <li><strong>Admin filter:</strong> Kies of je alle redacteuren, alleen Admins of alleen niet-Admins wilt tonen.</li>
+    </ul>
+    <hr/>
+
+    <h5>Redacteuren toevoegen</h5>
+    <p>Het toevoegen van een nieuwe redacteur is mogelijk door de volgende stappen te volgen:</p>
+    <ul>
+      <li><strong>Naam:</strong> Vul de naam van de redacteur in.</li>
+      <li><strong>Login:</strong> Gebruik het emailadres als loginnaam.</li>
+      <li><strong>Wachtwoord:</strong> Voer een wachtwoord voor de redacteur in.</li>
+      <li><strong>Admin:</strong> Geef aan of de redacteur wel of niet Admin is.</li>
+    </ul>
+    <p>Wanneer alle velden zijn ingevuld, klik je op de <strong>Opslaan</strong> knop om de nieuwe redacteur op te slaan in het systeem.</p>
+    <hr/>
+
+    <h5>Redacteuren bewerken</h5>
+    <p>Het bewerken van een bestaande redacteur geeft de volgende opties:</p>
+    <ul>
+      <li><strong>Naam:</strong> Bewerk de naam van de redacteur.</li>
+      <li><strong>Login:</strong> Wijzig het emailadres van de redacteur.</li>
+      <li><strong>Wachtwoord:</strong> Wijzig het wachtwoord van de redacteur.</li>
+      <li><strong>Admin:</strong> Verander de rol van de redacteur.</li>
+    </ul>
+    <hr/>
+  </div>
+</div>
+
+{% endblock %}

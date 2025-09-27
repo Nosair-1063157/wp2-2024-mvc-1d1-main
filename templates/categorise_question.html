@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container prompt-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 prompt_details_col">
+                <!-- Title categoriseren -->
+                <div class="title_prompts">
+                    <h1>Categoriseren</h1>
+                </div>
+
+                <!-- Flash messages for success -->
+                {% with messages = get_flashed_messages(category_filter=["success"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- Formulier -->
+                <form class="add_form bloom_category_form" method="POST" action="{{ url_for('category') }}">
+                    <label for="bloom_category_questions">Vragen</label>
+                    <select name="question" id="bloom_category_questions" class="dropdown" required>
+                        <option value="" class="place_holder"> Kies een vraag </option>
+                        {% for question in all_questions %}
+                        <option value="{{ question.questions_id }}"
+                            {% if preselect_q_id and question.questions_id == preselect_q_id %} selected {% endif %}>
+                                {{ question.question[:115] ~ ('...' if question.question|length > 115 else '') }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <div class="selection-button">
+                        <label for="bloom_category_prompts">Prompts</label>
+                        {% with messages = get_flashed_messages(category_filter=["error"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">{{ message }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                        <select name="prompts" id="bloom_category_prompts" class="dropdown" required>
+                            <option value="" class="place_holder"> Kies een prompt</option>
+                            {% for prompt in all_prompts %}
+                            <option value="{{ prompt.prompts_id }}">{{ prompt.prompt_title }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="bloom_category_taxonomy">Taxonomie</label>
+                        <select name="taxonomy" id="bloom_category_taxonomy" class="dropdown" required>
+                            <option value="" class="place_holder"> Kies een taxonomie</option>
+                            {% for taxonomy in all_taxonomies %}
+                                <option value="{{ taxonomy.taxonomy_id }}">{{ taxonomy.ai_taxonomy }}</option>
+                            {% endfor %}
+                        </select>
+
+                        
+                        <label for="ai_chat_selection">AI Model</label>
+                        <select name="ai_choice" id="ai_chat_selection" class="dropdown" required>
+                            <option value="" class="place_holder"> Kies een AI model</option>
+                            <option value="ollama">ollama</option>
+                            <option value="chatgpt">chatgpt</option>
+                        </select>
+                        <button class="btn btn-primary save_prompt" type="submit">Genereer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

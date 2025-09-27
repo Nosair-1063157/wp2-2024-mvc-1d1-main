@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <div class = "title_prompts">
+        <h1>Prompts Overzicht</h1>
+    </div>
+  
+    <!-- Table of prompts -->
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Prompt<!-- Bron: https://youtu.be/d3F5DlrpD28?si=xFsyl192OZ-L1zpC -->
+                    <!-- Sort link for date (ascending/descending) -->
+                    {% if order == 'asc' %}
+                        <a href="{{ url_for('prompt_overview', sort_by='prompt_title', order='asc' if order != 'asc' else 'desc') }}">A-Z ↑</a>
+                    {% else %}
+                        <a href="{{ url_for('prompt_overview', sort_by='prompt_title', order='desc' if order != 'desc' else 'asc') }}">A-Z ↓</a>
+                    {% endif %}</th>
+                <th scope="col">Redacteur</th>
+                <th scope="col">Toets vragen</th>
+                <th scope="col">Correct</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+
+    
+        {% if prompts %}
+        {% for prompt in prompts %}
+            <tr>
+                <td>{{ prompt.prompt_title }}</td>
+                <td>
+                    {% if prompt.display_name %}
+                        {{ prompt.display_name }}
+                    {% else %}
+                        Gebruiker verwijderd
+                    {% endif %}
+                </td>
+                
+                
+                <td>{{ prompt.questions_count }}</td>
+                <td>
+                    
+                    {% if prompt.percentage_correct %}
+                        {{ prompt.percentage_correct }}%
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                <button class="btn btn-primary" onclick="window.location.href='/prompt_details?prompts_id={{ prompt.prompts_id }}'">Details</button>
+            </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">Geen prompts gevonden</td>
+            </tr>
+            {% endif %}
+
+        </tbody>
+    </table>
+    <a href="{{ url_for('create_prompt') }}" class="btn btn-success add_btn">Nieuwe prompt</a>
+    {% if total_pages > 1 %}
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="{{ url_for('prompt_overview', page=page-1, user_id=selected_user, sort_by=sort_by, order=order) }}" class="arrow" title="Vorige pagina">❮</a>
+        {% else %}
+            <a class="arrow disabled" title="Vorige pagina">❮</a>
+        {% endif %}
+        
+        {% if page > 3 %}
+            <a href="{{ url_for('prompt_overview', page=1, user_id=selected_user, sort_by=sort_by, order=order) }}">1</a>
+            <span class="dots">...</span>
+        {% endif %}
+        
+        {% for page_num in range(
+            [1, page - 1]|max, 
+            [total_pages + 1, page + 2]|min
+        ) %}
+            {% if page_num == page %}
+                <a href="#" class="current">{{ page_num }}</a>
+            {% else %}
+                <a href="{{ url_for('prompt_overview', page=page_num, user_id=selected_user, sort_by=sort_by, order=order) }}">
+                    {{ page_num }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if page < total_pages - 2 %}
+            <span class="dots">...</span>
+            <a href="{{ url_for('prompt_overview', page=total_pages, user_id=selected_user, sort_by=sort_by, order=order) }}">
+                {{ total_pages }}
+            </a>
+        {% endif %}
+    
+        {% if page < total_pages %}
+            <a href="{{ url_for('prompt_overview', page=page+1, user_id=selected_user, sort_by=sort_by, order=order) }}" class="arrow" title="Volgende pagina">❯</a>
+        {% else %}
+            <a class="arrow disabled" title="Volgende pagina">❯</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+</body>
+{% endblock %}
+        

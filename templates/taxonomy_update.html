@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body id="create_taxonomy_body">
+    <div class="container">
+        <div class="col-8">
+            <form class="taxonomy_form" method="POST">
+                <h2>Vul een taxonomie in.</h2>
+                {% if message %}
+                    <div class="alert alert-info">{{ message }}</div>
+                {% endif %}
+                <div class="taxonomy_row">
+                    <div class="fixed-box">AI Taxonomie</div>
+                    <div class="fixed-box">Docent Taxonomie</div>
+                    <div class="fixed-box">Gemiddeld Taxonomie</div>
+                </div>
+                <div class="taxonomy_row">
+                    <input type="text" value="{{ taxonomy.ai_taxonomy }}" readonly/>
+                    <input type="text" name="teacher_taxonomy" value="{{ taxonomy.teacher_taxonomy }}" />
+                    <input type="text" name="average_taxonomy" value="{{ taxonomy.average_taxonomy}}" readonly/>
+                </div>
+                <button type="submit" class="save_taxonomy">Opslaan</button>
+                <button type="button" class="btn btn-light" onclick="window.location.href='/taxonomy_overview'">Return</button>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

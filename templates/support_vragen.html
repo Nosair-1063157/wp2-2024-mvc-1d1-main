@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/support" class="text-decoration-none">&larr; Support</a>
+
+<div class="d-flex">
+  <nav class="sidebar">
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link active" href="/support/vragen">Vragen</a></li>
+      <li class="nav-item"><a class="nav-link" href="/support/prompts">Prompts</a></li>
+      <li class="nav-item"><a class="nav-link" href="/support/redacteuren">Redacteuren</a></li>
+    </ul>
+  </nav>
+
+  <div class="content-container ms-4">
+    <h1>Vragen</h1>
+    <p>Leer hier alles over het werkproces van vragen</p>
+    <hr/>
+
+    <section>
+      <h4>Vragen Overzicht</h4>
+      <p>Het Vragen Overzicht toont via een tabel alle beschikbare vragen in het systeem, je kunt ook zoeken naar specifieke vragen met behulp van de zoekbalk.</p>
+      <p>Voor elke vraag zijn de volgende acties mogelijk:</p>
+      <ul>
+        <li><strong>Verwijderen:</strong> Hiermee kun je permanent een vraag verwijderen uit het systeem.</li>
+        <li><strong>Bewerken:</strong> Hiermee kun je de gegevens van een bestaande vraag aanpassen.</li>
+        <li><strong>Toevoegen:</strong> Hierdoor wordt je verwezen naar de pagina voor het maken van een nieuwe vraag.</li>
+      </ul>
+    </section>
+    <hr/>
+
+    <section>
+      <h5>Vragen Toevoegen</h5>
+      <p>Het toevoegen van een nieuwe vraag is mogelijk door de volgende stappen te volgen:</p>
+      <ul>
+        <li><strong>Vraag ID:</strong> Voer een unieke ID in voor de vraag.</li>
+        <li><strong>Prompt ID:</strong> Geef aan bij welke prompt de vraag hoort.</li>
+        <li><strong>Gebruiker:</strong> Selecteer de redacteur bij wie de vraag hoort.</li>
+        <li><strong>Vraag:</strong> Voer de vraag in.</li>
+        <li><strong>Bloom Taxonomie:</strong> Geef aan welk niveau van Bloom-taxonomie deze vraag representeert.</li>
+        <li><strong>RTTI:</strong> Voeg de juiste RTTI-classificatie toe.</li>
+      </ul>
+      <p>Wanneer alle velden zijn ingevuld, klik je op de <strong>Toevoegen</strong> knop om de vraag op te slaan in het systeem.</p>
+    </section>
+    <hr/>
+
+    <section>
+      <h5>Vragen Bewerken</h5>
+      <p>Het bewerken van een bestaande vraag geeft de volgende opties:</p>
+      <ul>
+        <li><strong>Vraag ID:</strong> Dit veld is read-only en kan niet meer worden aangepast.</li>
+        <li><strong>Prompt ID:</strong> Wijzig het ID om de prompt naar een andere vraag te verwijzen.</li>
+        <li><strong>Gebruiker:</strong> Wijzig de redacteur.</li>
+        <li><strong>Vraag:</strong> Bewerk de vraag.</li>
+        <li><strong>Bloom Taxonomie:</strong> Update het niveau van Bloom-taxonomie</li>
+        <li><strong>RTTI:</strong> Bewerk de RTTI-classificatie</li>
+      </ul>
+      <p>Wanneer jouw gekozen velden zijn aangepast, klik je op de <strong>Opslaan</strong> knop om de wijzigingen op te slaan. Of op de <strong>Annuleren</strong> knop om terug te gaan naar het vragen overzicht zonder enkele wijzigingen in te voeren.</p>
+    </section>
+    <hr/>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- templates/base.html -->
+{% extends "base.html"%}
+
+{% block content %}
+    <!-- Container voor  -->
+    <div class="container">
+        <h1>Nieuw Redacteuren</h1> &ensp;&emsp;&ensp;&emsp;
+
+        <form method="POST">
+              <div class="form-group">
+                  <label for="display_name">Naam</label>
+                  <input type="text" id="display_name" name="display_name" class="form-control" placeholder="Vul jouw volledige naam in" required>
+              </div>
+              <div class="form-group">
+                   <label for="login">Login Naam</label>
+                   <input type="text" id="login" name="login" class="form-control" placeholder="Vul jouw emailadres in" required>
+              </div>
+              <div class="form-group">
+                   <label for="password">Wachtwoord</label>
+                   <input type="password" id="password" name="password" class="form-control" placeholder="Vul jouw wachtwoord in " required>
+              </div>
+              <div class="form-group">
+                <label for="is_admin">Admin</label>
+                  <select id="is_admin" name="is_admin" class="form-control">
+                        <option value="1">Ja</option>
+                        <option value="0">Nee</option>
+                  </select>
+</div>
+              <div class="form-group">
+              <button type="submit" class="btn btn-primary">Opslaan</button>
+              </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

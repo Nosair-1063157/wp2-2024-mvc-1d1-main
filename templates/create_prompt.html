@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-8 prompt_details_col">
+            <!-- Title -->
+            <div class="title_prompts">
+                <h1>Nieuwe Prompt</h1>
+            </div>
+            
+            <!-- Form -->
+            <form class="add_form" method="POST">
+                <div class="form-group mb-4">
+                    <label for="prompt_title">Titel</label>
+                    <input type="text" 
+                           id="prompt_title" 
+                           name="Prompt_Title" 
+                           class="form-control" 
+                           required>
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label for="input_prompt">Prompt</label>
+                    <textarea id="input_prompt" 
+                            name="Prompt" 
+                            class="form-control"
+                            required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary save_prompt">Opslaan</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
