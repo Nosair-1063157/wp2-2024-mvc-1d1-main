@@ -11,12 +11,20 @@ from models.taxonomy import *
 from models.json_exporter import *
 from flask_bcrypt import Bcrypt
 from math import ceil
-
+from flask_wtf.csrf import CSRFProtect, generate_csrf
 
 app = Flask(__name__)
 app.secret_key = "tijdelijk"
 json_exporter = JSONExporter()
 bcrypt = Bcrypt(app)
+
+# CSRF Protectie
+app.config ['WTF_CSRF_TIME_LIMIT'] = 3600
+CSRFProtect(app)
+@app.context_processor
+def inject_csrf_token():
+    return {'csrf_token': generate_csrf}
+
 
 # Bron: https://github.com/Rac-Software-Development/wp-demos
 @app.before_request
@@ -58,12 +66,16 @@ def internal_error(error):
 
 # Bron: https://realpython.com/introduction-to-flask-part-2-creating-a-login-page/
 # Bron: https://www.fastapitutorial.com/blog/fastapi-jinja-login/
-@app.route('/login', methods=['GET','POST'])
+
+@app.route('/login', methods=['GET','POST'], endpoint='login')
 def login():
     if request.method == 'POST':
         # Get the data from the form
-        login_email = request.form['login']
-        login_password = request.form['password']
+        login_email = request.form.get('login')
+        login_password = request.form.get('password')
+
+        if not login_email or not login_password:
+            return render_template('loginpage.html', error="Vul alle velden in")
 
         # Check if user excists in database
         login_model = Login()
@@ -76,10 +88,8 @@ def login():
                 session['display_name'] = user['display_name']
                 session['user_id'] = user['user_id']
                 session['admin'] = user['admin']
+                return redirect('/homepage')
 
-            return redirect('/homepage')
-        else:
-            return render_template('loginpage.html', error="Ongeldige inloggegevens.")
     return render_template('loginpage.html')
 
 
