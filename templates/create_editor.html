@@ -13,6 +13,7 @@
     <!-- Form container -->
     <div class="data">
         <form class="inputbox" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="display_name">Naam</label>
                 <input type="text" id="display_name" name="display_name" class="form-control" placeholder="Vul jouw volledige naam in" required>

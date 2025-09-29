@@ -5,6 +5,7 @@
     <h1 class="my-4 text-center">Bewerk Vraag</h1>
 
     <form action="{{ url_for('edit_question', question_id=question['questions_id']) }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="form-group">
             <label for="question_id">Vraag ID</label>
             <input type="text" class="form-control" id="question_id" name="question_id" value="{{ question['questions_id'] }}" required readonly>
